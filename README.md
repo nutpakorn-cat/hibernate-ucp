@@ -3,7 +3,7 @@ HibernateUCP
 
 HibernateUCP คือระบบ UCP เกมมายคราฟแบบ Opensource พัฒนาด้วยภาษา PHP บน Framework Codeigniter
 
-ฟีเจอร์หลักๆที่ม
+ฟีเจอร์หลักๆที่มี
 ============
 = Admin Rcon บนเว็บไซต์<br>
 = Plugins ทุกคนก็เป็น Dev ได้! ไว้พัฒนาเพิ่มเติม<br>
