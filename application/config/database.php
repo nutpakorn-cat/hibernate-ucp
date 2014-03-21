@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['hostname'] = 'localhost'; //ไม่ต้องแก้ไข ถึงอัพขึ้น Vps ก็ไม่ต้องแก้ไข
+$db['default']['username'] = 'root'; //Username ฐานข้อมูล เช่น root
+$db['default']['password'] = ''; //password ฐานข้อมูล
+$db['default']['database'] = 'hbn-ucp'; //ชื่อฐานข้อมูล เช่น ucp
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
