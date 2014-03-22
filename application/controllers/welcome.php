@@ -1,26 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/*
+ * ไฟล์ Welcome เป็นไฟล์หลัก
+ */
 class Welcome extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('welcome_message');
-	}
+    public function index()
+    {
+        if($this->session->userdata("login") == TRUE) //ถ้าล็อกอินอยู่แล้ว
+        {
+            
+        }
+        else //ถ้ายังไม่ได้ล็อกอิน
+        {
+            $data['result'] = $this->db->get_where("tb_setting",array(
+                "server_id" => "1"
+            ));
+            $this->load->view("index",$data);
+        }
+    }
 }
 
 /* End of file welcome.php */
