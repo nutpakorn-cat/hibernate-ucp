@@ -10,10 +10,12 @@ $row = $result->row();
         <link rel="stylesheet" href="<?=base_url()?>assets/fonts.css">
     </head>
     <body>
+        <!-- WEll -->
         <div class="well">
             <div class="container">
                 <h1><?=$row->server_name?></h1>
             </div>
         </div>
+        <!-- WEll -->
 
     

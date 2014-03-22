@@ -14,7 +14,7 @@ class Welcome extends CI_Controller {
             $data['result'] = $this->db->get_where("tb_setting",array(
                 "server_id" => "1"
             ));
-            $this->load->view("index",$data);
+            $this->load->view("unlogin",$data);
         }
     }
 }
