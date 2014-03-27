@@ -8,7 +8,7 @@ class check extends CI_Model {
     }
     function check_password_db($nickname,$password) {
           $a=mysql_query("SELECT password FROM authme where username = '$nickname'");
-          if(mysql_num_rows($a) == 1 ) {
+          if(@mysql_num_rows($a) == 1 ) {
              $password_info=mysql_fetch_array($a);
              $sha_info = explode("$",$password_info[0]);
            } else return false;
