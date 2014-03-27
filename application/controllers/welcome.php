@@ -7,7 +7,7 @@ class Welcome extends CI_Controller {
     {
         if($this->session->userdata("login") == TRUE) //ถ้าล็อกอินอยู่แล้ว
         {
-            
+            redirect("member/control");
         }
         else //ถ้ายังไม่ได้ล็อกอิน
         {

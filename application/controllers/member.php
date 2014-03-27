@@ -11,7 +11,28 @@ class member extends CI_Controller {
     }
     public function index()
     {
-        redirect("welcome");
+        if($this->session->userdata("login") == TRUE)
+        {
+            redirect("member/control"); //ถ้าล็อกอินอยู่ก็ให้ redirect ไปที่ คลาส member method control
+        }
+        else
+        {
+            redirect("welcome");
+        }
+    }
+    public function control()
+    {
+        if($this->session->userdata("login") == TRUE)
+        {
+            $data['result'] = $this->db->get("tb_setting",array(
+                "server_id" => "1"
+            ));
+            $this->load->view("member/control",$data);
+        }
+        else
+        {
+            redirect("welcome");
+        }
     }
     public function register()
     {
