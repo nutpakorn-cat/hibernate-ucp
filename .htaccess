@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteBase /icraft-shop/
+RewriteBase /HibernateUCP/
 RewriteCond $1 !^(index\.php|applications|assets|system|theme|img)
 RewriteRule ^(.*)$ index.php [L]

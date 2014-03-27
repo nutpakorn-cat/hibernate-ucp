@@ -2,44 +2,7 @@
         <hr>
         <p>Powered By Codeigniter HibernateUCP opensource : <strong><a href="https://github.com/nutterrocker/HibernateUCP" class="text-muted">Github</a></strong> | Main dev : <strong><a class="text-muted" href="https://www.facebook.com/pages/Twiceworld-PHP-Thailand-%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99-php-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A%E0%B9%84%E0%B8%8B%E0%B8%95%E0%B9%8C/573397832751167">Twiceworld PHP Minecraft</a></strong></p>
     </div>
-    <script src="<?=base_url()?>assets/jquery.js"></script>
     <script src="<?=base_url()?>assets/main.js"></script>
-    <!-- โพสแบบ Jquery -->
-    <script>
-       $().ready(function(){
-       $('form#v0').submit(function(){
-           data=$('form#v0').serialize();
-           $.post('<?=base_url()?>member/auth' ,data ,function(response){ //โพสไปที่คลาส member method auth
-               if(response === "TRUE")
-               {
-                   location.reload();
-               }
-               else
-               {
-                   $( "div#status1" ).html(response);
-               }
-           });
-           return false;
-       });
-   });   
-   $().ready(function(){
-       $('form#vx').submit(function(){
-           data=$('form#vx').serialize();
-           $.post('<?=base_url()?>member/register' ,data ,function(response){ //โพสไปที่คลาส member method register
-               if(response === "TRUE")
-               {
-                   location.reload();
-               }
-               else
-               {
-                   $( "div#status2" ).html(response);
-               }
-           });
-           return false;
-       });
-   });   
-    </script>
-    <!-- /โพสแบบ jquery -->
     <script>
     $( "div#register" ).hide(); //ซ่อน well register
     $( "div#login" ).hide(); //ซ่อน well login

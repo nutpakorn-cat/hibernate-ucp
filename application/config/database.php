@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost'; //ไม่ต้องแก้ไข ถึงอัพขึ้น Vps ก็ไม่ต้องแก้ไข
 $db['default']['username'] = 'root'; //Username ฐานข้อมูล เช่น root
-$db['default']['password'] = ''; //password ฐานข้อมูล
+$db['default']['password'] = '123456'; //password ฐานข้อมูล
 $db['default']['database'] = 'hbn-ucp'; //ชื่อฐานข้อมูล เช่น ucp
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

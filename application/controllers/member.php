@@ -15,11 +15,7 @@ class member extends CI_Controller {
     }
     public function register()
     {
-        if($this->session->userdata("login") == TRUE) //ถ้าล็อกอินอยู่แล้ว
-        {
-            redirect("member/control");
-        }
-        else if($this->input->post("v4",TRUE) != NULL && $this->input->post("v5",TRUE) != NULL && $this->input->post("v6",TRUE) != NULL) //ถ้าโพสข้อมูล
+        if($this->input->post("v4",TRUE) != NULL && $this->input->post("v5",TRUE) != NULL && $this->input->post("v6",TRUE) != NULL) //ถ้าโพสข้อมูล
         {
             @$username = $this->input->post("v4",TRUE); //Username ชื่อผู้ใช้
             @$password = $this->input->post("v5",TRUE); //Password
@@ -78,6 +74,10 @@ class member extends CI_Controller {
                     echo "TRUE";
                 }
             }
+        }
+        else
+        {
+            redirect("welcome");
         }
     }
 }

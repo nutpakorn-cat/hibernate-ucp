@@ -48,6 +48,7 @@ $this->load->view("theme/user/header");
             <div id="status2"></div>
             <form id="vx" method="post">
             <?php
+            
             echo form_input(array(
                 "name" => "v4",
                 "class" => "form-control",
