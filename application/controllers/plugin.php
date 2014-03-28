@@ -9,7 +9,70 @@ class plugin extends CI_Controller {
     }
     public function delete($id = "")
     {
-        
+        if($this->session->userdata("login_admin") == TRUE)
+        {
+            if($id == "")
+            {
+                $data['msg'] = "ข้อผิดพลาด กรุณาระบุ Id";
+                $this->load->view("server",$data);
+            }
+            else
+            {
+                @$result = $this->db->get_where("tb_plugins",array(
+                    "plugins_id" => "$id"
+                ));
+                if(@$result->num_rows() > 0)
+                {
+                    //Controllers
+                    foreach(@$result->result() as $row)
+                    {
+                        $dir = "application/controllers/$row->plugins_name";
+                        foreach (@scandir($dir) as $item) {
+                            if ($item == '.' || $item == '..') continue;
+                            @unlink(@$dir.DIRECTORY_SEPARATOR.$item);
+                        }
+                        @rmdir(@$dir);
+                        $dir = "application/views/$row->plugins_name";
+                        foreach (@scandir($dir) as $item) {
+                            if ($item == '.' || $item == '..') continue;
+                            @unlink(@$dir.DIRECTORY_SEPARATOR.$item);
+                        }
+                        @rmdir(@$dir);
+                        $dir = "application/models/$row->plugins_name";
+                        foreach (@scandir($dir) as $item) {
+                            if ($item == '.' || $item == '..') continue;
+                            @unlink(@$dir.DIRECTORY_SEPARATOR.$item);
+                        }
+                        @rmdir(@$dir);
+                        $dir = "application/helpers/$row->plugins_name";
+                        foreach (@scandir($dir) as $item) {
+                            if ($item == '.' || $item == '..') continue;
+                            @unlink(@$dir.DIRECTORY_SEPARATOR.$item);
+                        }
+                        @rmdir(@$dir);
+                        if(@$this->db->delete("tb_plugins",array("plugins_id" => "$id")) && @$this->db->delete("tb_plugins_data",array("name" => "$row->plugins_name")))
+                        {
+                            @$msg['msg'] .= "<strong class='text-success'>ลบฐานข้อมูลของปลั๊กอิน $row->plugins_name เรียบร้อย</strong><br>";
+                        }
+                        else
+                        {
+                            @$msg['msg'] .= "<strong class='text-danger'>ไม่สามารถลบไฟล์ของปลั๊กอิน $row->plugins_name ได้</strong><br>";
+                        }
+                        @$msg['msg'] .= "<strong class='text-success'>ลบไฟล์ของปลั๊กอิน $row->plugins_name เรียบร้อย</strong><br>";
+                        $this->load->view("server",$msg);
+                    }
+                }
+                else
+                {
+                    $data['msg'] = "ข้อผิดพลาด : ไม่มีปลั๊กอินนี้อยู่ในระบบ";
+                    $this->load->view("server",$data);
+                }
+            }
+        }
+        else
+        {
+            redirect("welcome");
+        }
     }
     public function reload()
     {
