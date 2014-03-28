@@ -1,68 +1,43 @@
 <!-- [Info]  -->
-<?php
-$this->load->helper("dbhelper");
-@$member = $this->db->get_where("".  table_iconomy() ."",array(
-    "".  col_username() ."" => "{$this->session->userdata("username")}"
-)); //ดึงข้อมูลจาก iConomy
-$row_member = $member->row();
-?>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">รายละเอียด</h3>
+        <h3 class="panel-title">รายละเอียดแอดมิน</h3>
     </div>
     <div class="panel-body">
-        <p>ชื่อในเกม : <?=htmlentities($this->session->userdata("username"))?></p>
-        <p>เงินในเกม : <?=htmlentities($row_member->balance)?></p>
+        <p>Admin User : <?=  htmlentities($this->session->userdata("username_admin"))?></p>
         <?php
         @$info = $this->db->get_where("tb_plugins_data",array(
-            "key" => "info"
-        )); //ดึงการประมวลผล PHP ออกมา
+            "key" => "info_admin"
+        ));
         if(@$info->num_rows() > 0)
         {
             foreach(@$info->result() as $row_info)
             {
-                @eval($row_info->value);
+                eval($row_info->value);
             }
         }
         ?>
     </div>
-</div>
-<!-- [Info]  -->
-<!-- [Control] -->
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">ปุ่มควบคุม</h3>
-    </div>
-    <div class="panel-body">
+    <div class="panel-footer">
         <?php
-        @$btn = $this->db->get_where("tb_plugins_data",array(
-            "key" => "btn"
+        echo anchor("admin/logout","ออกจากระบบแอดมิน",array(
+            "class" => "btn btn-lg btn-danger"
         ));
-        if(@$btn->num_rows() > 0)
-        {
-            foreach(@$btn->result() as $row_btn)
-            {
-                eval($row_btn->value);
-            }
-        }
+        echo " | ";
+        echo anchor("admin/reset","เปลี่ยนรหัสผ่าน",array(
+            "class" => "btn btn-lg btn-primary"
+        ));
         ?>
-        <?= anchor("member/logout","ออกจากระบบ",array(
-            "class" => "btn btn-lg btn-danger btn-block"
-        )) ?>
     </div>
 </div>
-<!-- [Control] -->
-<!-- [Plugins] -->
 <?php
 @$panel_left = $this->db->get_where("tb_plugins_data",array(
-    "key" => "panel_left"
+    "key" => "panel_left_admin"
 ));
 if(@$panel_left->num_rows() > 0)
 {
-    foreach($panel_left->result() as $row_left)
+    foreach(@$panel_left->result() as $row_left)
     {
-        eval($row_left->value);
+        eval(@$row_left->value);
     }
 }
-?>
-<!-- [Plugins] -->

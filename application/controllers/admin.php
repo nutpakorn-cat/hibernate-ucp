@@ -6,6 +6,20 @@ class admin extends CI_Controller {
     public function __construct() {
         parent::__construct();
     }
+    public function control()
+    {
+        if($this->session->userdata("login_admin") == TRUE)
+        {
+            $data['result'] = $this->db->get_where("tb_setting",array(
+                "server_id" => "1"
+            ));
+            $this->load->view("admin/control",$data);
+        }
+        else
+        {
+            redirect("admin");
+        }
+    }
     public function index()
     {
         if($this->session->userdata("login_admin") == TRUE) //ถ้าแอดมินเข้าสู่ระบบอยู่แล้ว
@@ -61,6 +75,21 @@ class admin extends CI_Controller {
             {
                 redirect("admin");
             }
+        }
+    }
+    public function logout()
+    {
+        if($this->session->userdata("login_admin") != TRUE)
+        {
+            redirect("welcome");
+        }
+        else
+        {
+            $this->session->unset_userdata(array(
+                "login_admin" => FALSE,
+                "username_admin" => ""
+            ));
+            redirect("welcome");
         }
     }
 }
