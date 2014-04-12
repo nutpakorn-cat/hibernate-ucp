@@ -20,4 +20,4 @@ HibernateUCP คือระบบ UCP เกมมายคราฟแบบ O
 เอกสาร Dev
 ============
 
-รออัพเดท.....
+https://github.com/nutterrocker/HibernateUCP/wiki
