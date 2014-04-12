@@ -17,7 +17,7 @@ HibernateUCP คือระบบ UCP เกมมายคราฟแบบ O
 
 รออัพเดท......
 
-เอกสาร Dev
+เอกสารวิธีลง
 ============
 
 https://github.com/nutterrocker/HibernateUCP/wiki
