@@ -13,6 +13,23 @@ $this->load->view("theme/admin/header");
                     <h3 class="panel-title">จัดการปลั๊กอินในเว็บ</h3>
                 </div>
                 <div class="panel-body">
+                    <p>เพิ่ม Plugin</p>
+                    <?php
+                    echo form_open("plugin/add");
+                    echo form_input(array(
+                        "name" => "name",
+                        "class" => "form-control",
+                        "placeholder" => "ชื่อปลั๊กอิน ต้องเป็นชื่อเดียวกับโฟเดอร์ปลั๊กอิน",
+                        "required" => ""
+                    ));
+                    echo "<p></p>";
+                    echo form_submit(array(
+                        "name" => "submit",
+                        "class" => "btn btn-lg btn-success btn-block",
+                        "value" => "เพิ่ม"
+                    ));
+                    ?>
+                    <hr>
                     <?=anchor("plugin/reload","โหลดการทำงานใหม่",array("class" => "btn btn-lg btn-block btn-primary"))?>
                     <table class="table table-striped table-hover ">
                       <thead>
@@ -46,6 +63,18 @@ $this->load->view("theme/admin/header");
                 </div>
             </div>
             <!-- [ Plugins Control ] -->
+            <?php
+            @$panel_right = $this->db->get_where("tb_plugins_data",array(
+                "key" => "panel_right_admin"
+            ));
+            if(@$panel_right->num_rows() > 0)
+            {
+                foreach($panel_right->result() as $row_right)
+                {
+                    eval($row_right->value);
+                }
+            }
+            ?>
         </div>
     </div>
 </div>

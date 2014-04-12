@@ -61,7 +61,7 @@ if(@$panel_left->num_rows() > 0)
 {
     foreach($panel_left->result() as $row_left)
     {
-        eval($row_left->value);
+        echo eval($row_left->value);
     }
 }
 ?>

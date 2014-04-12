@@ -1,4 +1,7 @@
 <?php
+/*
+ * หน้า Plugins โดย Twiceworld PHP
+ */
 class plugin extends CI_Controller {
     public function __construct() {
         parent::__construct();
@@ -6,6 +9,36 @@ class plugin extends CI_Controller {
     public function index()
     {
         redirect("welcome");
+    }
+    public function add()
+    {
+        if($this->session->userdata("login_admin") == TRUE)
+        {
+            if($this->input->post("name") != NULL && $this->input->post("submit") != NULL)
+            {
+                $name = $this->input->post("name",TRUE);
+                @$result = $this->db->get_where("tb_plugins",array(
+                    "plugins_name" => "$name"
+                ));
+                if(@$result->num_rows() > 0)
+                {
+                    $data['msg'] = "ข้อผิดพลาด : Plugin นี้มีอยู่ในระบบแล้ว";
+                    $this->load->view("server",$data);
+                }
+                else
+                {
+                    $this->db->insert("tb_plugins",array(
+                        "plugins_name" => "$name"
+                    ));
+                    $data['msg'] = "เพิ่ม Plugin เรียบร้อย <strong>Plugin จะไม่มีผลหากคุณไม่ Reload Plugin</strong> " . anchor("plugin/reload","รีโหลดตอนนี้",array("class" => "text-muted"));
+                    $this->load->view("server",$data);
+                }
+            }
+        }
+        else
+        {
+            redirect("admin");
+        }
     }
     public function delete($id = "")
     {
@@ -85,33 +118,33 @@ class plugin extends CI_Controller {
                 foreach(@$plugins->result() as $row_plugins)
                 {
                     //================== [Reload หน้า index.php] ==================
-                    $text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/index.php');
-                    $data = "";
-                    foreach($text as $value){
-                        $data .= $value;
-                    }
-                    eval(@$data);
+                    require_once FCPATH . 'plugins/'.$row_plugins->plugins_name.'/index.php';
+                    $index = new index();
+                    @$query = @$index->hbn_query_all();
+                    while ( ($query_data = current($query)) !== FALSE ) {
+                        $this->db->insert("tb_plugins_data",array(
+                            "key" => key($query),
+                            "name" => "$row_plugins->plugins_name",
+                            "value" => $query[key($query)]
+                        ));
+                       next($query);
+                    }   
                     //=========================================================
-                    //================== [Reload หน้า info.php] ==================
-                    $text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/info.php');
-                    $info = "";
-                    foreach($text as $value){
-                        $info .= $value;
-                    }
-                    eval(@$info);
+                    //================== [Reload ข้อมูล] ==================
                     //Controller
+                    $info_controller = $index->hbn_get_controllers();
                     @$count = count($info_controller);
                     if($count != 0)
                     {
                         for($i = 0;$i != $count;$i++)
                         {
-                            if(@file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Controllers/'.$info_controller[$i]) != TRUE)
+                            if(@file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Controllers/'.$info_controller[$i]) != TRUE)
                             {
                                 @$datsa['msg'] .= "<strong class='text-danger'>[Controllers]ไม่พบไฟล์ ".$info_controller[$i]." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";
                             }
                             else
                             {
-                                @$text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Controllers/'.$info_controller[$i]);
+                                @$text = file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Controllers/'.$info_controller[$i]);
                                 @$info = "";
                                 foreach($text as $value){
                                     $info .= $value;
@@ -139,19 +172,20 @@ class plugin extends CI_Controller {
                         }
                     }
                     //========================================================
-                    //Views
+                    //Viewsc
+                    $info_view = $index->hbn_get_views();
                     @$count = count($info_view);
                     if($count != 0)
                     {
                         for($i = 0;$i != $count;$i++)
                         {
-                            if(@file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Views/'.$info_view[$i]) != TRUE)
+                            if(@file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Views/'.$info_view[$i]) != TRUE)
                             {
                                 @$datsa['msg'] .= "<strong class='text-danger'>[Views]ไม่พบไฟล์ ".$info_view[$i]." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";
                             }
                             else
                             {
-                                @$text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Views/'.$info_view[$i]);
+                                @$text = file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Views/'.$info_view[$i]);
                                 @$info = "";
                                 foreach($text as $value){
                                     $info .= $value;
@@ -180,18 +214,19 @@ class plugin extends CI_Controller {
                     }
                     //========================================================
                     //Models
+                    $info_model = $index->hbn_get_models();
                     @$count = count($info_model);
                     if($count != 0)
                     {
                         for($i = 0;$i != $count;$i++)
                         {
-                            if(@file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Models/'.$info_model[$i]) != TRUE)
+                            if(@file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Models/'.$info_model[$i]) != TRUE)
                             {
                                 @$datsa['msg'] .= "<strong class='text-danger'>[Models]ไม่พบไฟล์ ".$info_model[$i]." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";
                             }
                             else
                             {
-                                @$text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Models/'.$info_model[$i]);
+                                @$text = file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Models/'.$info_model[$i]);
                                 @$info = "";
                                 foreach($text as $value){
                                     $info .= $value;
@@ -220,24 +255,25 @@ class plugin extends CI_Controller {
                     }
                     //========================================================
                     //Helper
+                    $info_helper = $index->hbn_get_helpers();
                     @$count = count($info_helper);
                     if($count != 0)
                     {
                         for($i = 0;$i != $count;$i++)
                         {
-                            if(@file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Helpers/'.$info_helper[$i]) != TRUE)
+                            if(@file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Helpers/'.$info_helper[$i]) != TRUE)
                             {
-                                @$datsa['msg'] .= "<strong class='text-danger'>[Models]ไม่พบไฟล์ ".$info_helper[$i]." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";
+                                @$datsa['msg'] .= "<strong class='text-danger'>[Helpers]ไม่พบไฟล์ ".$info_helper[$i]." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";
                             }
                             else
                             {
-                                @$text = file(base_url() . 'plugins/'.$row_plugins->plugins_name.'/Helpers/'.$info_helper[$i]);
+                                @$text = file(FCPATH . 'plugins/'.$row_plugins->plugins_name.'/Helpers/'.$info_helper[$i]);
                                 @$info = "";
                                 foreach($text as $value){
                                     $info .= $value;
                                 }
                                 @mkdir("application/helpers/$row_plugins->plugins_name", 0777);
-                                $path = "application/helpers/$row_plugins->plugins_name/".$info_model[$i];
+                                $path = "application/helpers/$row_plugins->plugins_name/".$info_helper[$i];
                                 if(@$open = fopen($path, 'w'))
                                 {
                                     @$datsa['msg'] .= "<strong class='text-success'>[Helpers]สร้างไฟล์ ".$info_helper[$i]." เสร็จสมบูรณ์ ที่ตำแหน่ง ".base_url() . $path." ของ Plugin ".$row_plugins->plugins_name."</strong><br>";

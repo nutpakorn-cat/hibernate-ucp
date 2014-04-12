@@ -38,7 +38,7 @@ $this->load->view("theme/member/header");
             {
                 foreach($panel_right->result() as $row_right)
                 {
-                    eval($row_right->value);
+                    echo $row_right->value;
                 }
             }
             ?>
