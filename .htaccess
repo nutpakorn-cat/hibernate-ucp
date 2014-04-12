@@ -1,4 +1,0 @@
-RewriteEngine on
-RewriteBase /HibernateUCP/
-RewriteCond $1 !^(index\.php|applications|assets|system|theme|img|plugins|test\.php)
-RewriteRule ^(.*)$ index.php [L]
