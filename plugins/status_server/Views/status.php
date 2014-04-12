@@ -1,6 +1,10 @@
 <?php 
 $this->load->helper("status_server/stat");
-$ip = "localhost";
+$res = $this->db->get_where("tb_setting",array(
+    "server_id" => "1"
+));
+$row_res = $res->row();
+$ip = $row_res->server_ip;
 $status = new MinecraftServerStatus();
 $response = $status->getStatus($ip); 
 
