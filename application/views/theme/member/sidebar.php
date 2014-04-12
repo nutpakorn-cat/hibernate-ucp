@@ -21,7 +21,7 @@ $row_member = $member->row();
         {
             foreach(@$info->result() as $row_info)
             {
-                @eval($row_info->value);
+                echo eval($row_info->value);
             }
         }
         ?>
@@ -42,7 +42,7 @@ $row_member = $member->row();
         {
             foreach(@$btn->result() as $row_btn)
             {
-                eval($row_btn->value);
+                echo eval($row_btn->value);
             }
         }
         ?>

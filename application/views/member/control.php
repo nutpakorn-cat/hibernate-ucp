@@ -20,7 +20,7 @@ $this->load->view("theme/member/header");
                     {
                         foreach(@$edit->result() as $row_edit)
                         {
-                            eval($row_edit->value); //รันคำสั่ง
+                            echo eval($row_edit->value); //รันคำสั่ง
                         }
                     }
                     else
@@ -38,7 +38,7 @@ $this->load->view("theme/member/header");
             {
                 foreach($panel_right->result() as $row_right)
                 {
-                    echo $row_right->value;
+                    echo eval($row_right->value);
                 }
             }
             ?>
