@@ -1,7 +1,7 @@
 <?php
-/*
- * คลาส Admin
- */
+// Filename: admin.php
+// Part of nutterrocker's HibernateUCP.
+// Copyright (C) 2014 nutterrocker. Any rights allowed except change product name.
 class admin extends CI_Controller {
     public function __construct() {
         parent::__construct();

@@ -1,7 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+// Filename: dbhelper_helper.php
+// Part of nutterrocker's HibernateUCP.
+// Copyright (C) 2014 nutterrocker. Any rights allowed except change product name.
 /*
  * ตั้งค่า iConomy Authme
- * เพื่อเพิ่มความยืดหยุุ่น
  */
 /*
  *  ====================== [ Table ] ====================== 

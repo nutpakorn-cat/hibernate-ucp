@@ -1,10 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * Member Controller
- * 
- * HibernateUCP
- * 
- */
+// Filename: member.php
+// Part of nutterrocker's HibernateUCP.
+// Copyright (C) 2014 nutterrocker. Any rights allowed except change product name.
 class member extends CI_Controller {
     public function __construct() {
         parent::__construct();

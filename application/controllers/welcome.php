@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
- * ไฟล์ Welcome เป็นไฟล์หลัก
- */
+// Filename: welcome.php
+// Part of nutterrocker's HibernateUCP.
+// Copyright (C) 2014 nutterrocker. Any rights allowed except change product name.
 class Welcome extends CI_Controller {
     public function index()
     {

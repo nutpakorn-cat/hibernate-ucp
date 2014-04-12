@@ -1,7 +1,7 @@
 <?php
-/*
- * หน้า Plugins โดย Twiceworld PHP
- */
+// Filename: plugin.php
+// Part of nutterrocker's HibernateUCP.
+// Copyright (C) 2014 nutterrocker. Any rights allowed except change product name.
 class plugin extends CI_Controller {
     public function __construct() {
         parent::__construct();
