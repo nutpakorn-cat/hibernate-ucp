@@ -1,4 +1,7 @@
 <?php
+$result = $this->db->get_where("tb_setting",array(
+    "server_id" => "1"
+));
 $row = $result->row();
 ?>
 <!DOCTYPE html>
