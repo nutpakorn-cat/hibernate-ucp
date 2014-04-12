@@ -119,20 +119,38 @@ class plugin extends CI_Controller {
                 {
                     //================== [Reload หน้า index.php] ==================
                     require_once FCPATH . 'plugins/'.$row_plugins->plugins_name.'/index.php';
-                    $index = new index();
-                    @$query = @$index->hbn_query_all();
+                    @$query = @$query_all;
                     while ( ($query_data = current($query)) !== FALSE ) {
-                        $this->db->insert("tb_plugins_data",array(
-                            "key" => key($query),
+                        $result = $this->db->get_where("tb_plugins_data",array(
                             "name" => "$row_plugins->plugins_name",
-                            "value" => $query[key($query)]
+                            "key" => key($query)
                         ));
-                       next($query);
+                        if($result->num_rows() > 0)
+                        {
+                            $this->db->where(array(
+                                "name" => "$row_plugins->plugins_name",
+                                "key" => key($query)
+                            ));
+                            $this->db->update("tb_plugins_data",array(
+                                "key" => key($query),
+                                "name" => "$row_plugins->plugins_name",
+                                "value" => $query[key($query)]
+                            ));
+                            next($query);
+                        }
+                        else
+                        {
+                            $this->db->insert("tb_plugins_data",array(
+                                "key" => key($query),
+                                "name" => "$row_plugins->plugins_name",
+                                "value" => $query[key($query)]
+                            ));
+                            next($query);
+                        }
                     }   
                     //=========================================================
                     //================== [Reload ข้อมูล] ==================
                     //Controller
-                    $info_controller = $index->hbn_get_controllers();
                     @$count = count($info_controller);
                     if($count != 0)
                     {
@@ -173,7 +191,6 @@ class plugin extends CI_Controller {
                     }
                     //========================================================
                     //Viewsc
-                    $info_view = $index->hbn_get_views();
                     @$count = count($info_view);
                     if($count != 0)
                     {
@@ -214,7 +231,6 @@ class plugin extends CI_Controller {
                     }
                     //========================================================
                     //Models
-                    $info_model = $index->hbn_get_models();
                     @$count = count($info_model);
                     if($count != 0)
                     {
@@ -255,7 +271,6 @@ class plugin extends CI_Controller {
                     }
                     //========================================================
                     //Helper
-                    $info_helper = $index->hbn_get_helpers();
                     @$count = count($info_helper);
                     if($count != 0)
                     {
