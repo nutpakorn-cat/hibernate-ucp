@@ -1,0 +1,11 @@
+Download Plugins มาแล้วนำโฟเดอร์ไปไว้ที่โฟเดอร์ Plugins
+จากนั้นเปิดเว็บไซต์
+ล็อกอินแอดมิน ที่ www.xxx.com/hibernateUCP/admin
+หรือ
+localhost/hibernateUCP/admin
+Username ใส่ admin
+พาสเวิร์ดใส่ 123
+จากนั้นในช่องเพิ่ม Plugins ใส่ชื่อโฟเดอร์ Plugins นั้น เช่น status_server
+จากนั้นกดเพิ่ม
+ระบบจะถามว่าจะ Reload เลยไหม กด รีโหลด
+เสร็จสิ้นการติดตั้ง

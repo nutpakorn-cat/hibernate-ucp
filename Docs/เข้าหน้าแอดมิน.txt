@@ -1,0 +1,11 @@
+เปิดหน้าเว็บหลักของระบบ
+เช่น
+localhost/hibernateUCP
+www.xx.com/hibernateUCP
+เพิ่ม admin ไว้ตอนท้าย url เป็น
+localhost/hibernateUCP/admin
+www.xx.com/hibernateUCP/admin
+จากนั้นเข้าสู่ระบบ
+ถ้ายังไม่ได้เปลี่ยนพาสเวิร์ดให้ใส่
+user : admin
+Pass : 123
