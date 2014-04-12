@@ -19,7 +19,6 @@ $response = $status->getStatus($ip);
                     <p>สถานะเซิฟเวอร์ : <?=$status2?></p><?php
 ?>
 <span class="style2"><p>จำนวนผู้เล่น : <?php echo $response['players']; ?> / <?php echo $response['maxplayers']; ?></p>
-  <? } ?>
 </p>
   <p>เปิดมาแล้ว :
   <strong><script type="text/javascript">
