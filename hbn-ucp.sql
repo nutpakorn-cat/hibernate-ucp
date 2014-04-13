@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `tb_setting` (
   `server_rcon` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `server_rcon_port` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
   `game_world` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `start_money` int(11) NOT NULL,
+  `start_money` double(64,2) NOT NULL,
   PRIMARY KEY (`server_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 

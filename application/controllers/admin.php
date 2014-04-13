@@ -65,6 +65,17 @@ class admin extends CI_Controller {
                 ));
                 redirect("admin");
             }
+            else if($this->input->post("game_world",TRUE) != NULL && $this->input->post("start_money",TRUE) != NULL && $this->input->post("send",TRUE) != NULL)
+            {
+                $this->db->where(array(
+                    "server_id" => "1"
+                ));
+                $this->db->update("tb_setting",array(
+                    "game_world" => "{$this->input->post("game_world",TRUE)}",
+                    "start_money" => "{$this->input->post("start_money",TRUE)}"
+                ));
+                redirect("admin");
+            }
             else
             {
                 redirect("admin");

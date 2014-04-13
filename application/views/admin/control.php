@@ -65,11 +65,47 @@ $this->load->view("theme/admin/header");
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">จัดการ IP,Port,Rcon,Rcon Port</h3>
+                    <h3 class="panel-title">เงินเริ่มต้นเมื่อสมัครและ world ในเกม</h3>
                 </div>
                 <div class="panel-body">
                     <?php
                     $row_result = $result->row();
+                    ?>
+                    <p>World เริ่มต้นปัจจุบัน : <?=$row_result->game_world?></p>
+                    <p>เงินเริ่มต้นเมื่อสมัครปัจจุบัน : <?=number_format($row_result->start_money,2,".",",")?></p>
+                    <hr>
+                    <?php
+                    echo form_open("admin/edit");
+                    echo form_input(array(
+                        "name" => "game_world",
+                        "class" => "form-control",
+                        "placeholder" => "ตั้งค่า World เริ่มต้นใหม่ ต้องเป็นชื่อ map เดียวกับในเซิฟ",
+                        "required" => ""
+                    ));
+                    echo "<p></p>";
+                    echo form_input(array(
+                        "name" => "start_money",
+                        "class" => "form-control",
+                        "placeholder" => "ตั้งค่าเงินเริ่มต้นใหม่ ใส่เป็นทศนิยม 2 ตำแหน่งได้",
+                        "required" => ""
+                    ));
+                    echo "<p></p>";
+                    echo form_submit(array(
+                        "name" => "send",
+                        "class" => "btn btn-lg btn-danger btn-block",
+                        "value" => "เปลี่ยนแปลง"
+                    ));
+                    echo form_close();
+                    ?>
+                </div
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">จัดการ IP,Port,Rcon,Rcon Port</h3>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    
                     echo form_open("admin/edit");
                     echo form_input(array(
                         "name" => "v1",
