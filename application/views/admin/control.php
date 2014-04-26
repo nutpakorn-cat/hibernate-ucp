@@ -97,7 +97,7 @@ $this->load->view("theme/admin/header");
                     ));
                     echo form_close();
                     ?>
-                </div
+                </div>
             </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
