@@ -1,3 +1,6 @@
+# (ARCHIVED PROJECT) (Written when i was 13 years old)
+Code จะไม่ Clean นะครับเนื่องจากเป็น Project เก่าที่ทำตอนอายุ 13 ปัจจุบัน Project นี้ถูก Achived หรือเปลี่ยนเป็นโหมด Read only แล้วครับ
+
 HibernateUCP
 ============
 
